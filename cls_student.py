@@ -4,7 +4,7 @@ Created on Nov 21, 2020
 @author: MeghanaSantosh
 '''
 
-students = [["Ben", {"Maths": 77, "English": 78, "Science": 90}],
+student_data = [["Ben", {"Maths": 77, "English": 78, "Science": 90}],
             ["Mark", {"Maths": 56, "Art": 95, "History": 65, "Geography": 55}],
             ["Paul", {"English": 66, "History": 88}]]
 
@@ -17,12 +17,12 @@ class Student():
         
     def print_report_card(self):
         print("Report card for student", self.name)
-            for subject, mark in self.marks.items():# Maths, 77
-                for grade in grades:
-                    if mark < grade[0]: # Mark=77, 0, 50, 60, 70, 80
-                        print(subject, " : ", prev_grade) # Maths, B
-                        break
-                    prev_grade = grade[1] # Fail, D, C, B
+        for subject, mark in self.marks.items():# Maths, 77
+            for grade in grades:
+                if mark < grade[0]: # Mark=77, 0, 50, 60, 70, 80
+                    print(subject, " : ", prev_grade) # Maths, B
+                    break
+                prev_grade = grade[1] # Fail, D, C, B
     
     def add_mark(self, student_name, subject, mark):
         if subject in self.marks.keys():
@@ -36,11 +36,7 @@ class Student():
         else:
             self.marks[subject] = mark
             return "Students mark added"
-
-    
-    
-
-                
+              
 class Students():
     def __init__(self, all_students):
         self.students = []
@@ -70,7 +66,8 @@ class Students():
             if student_name == student.name:
                 return student.add_mark(student_name, subject, mark)
         return "Student Not Found"
-        
+
+students = Students(student_data)       
 while True:
     print("Welcome to the student database")
     print("What can I help you with?")
@@ -87,13 +84,13 @@ while True:
         user_choice = 0
     
     if user_choice == 1:
-        print_report_card()
+        students.print_report_cards()
     elif user_choice == 2:
         enter_student = input("Which Student? ")
-        print_report_card(enter_student)
+        students.print_report_cards(enter_student)
     elif user_choice == 3:
         enter_student = input("Student name? ")
-        print(add_student(enter_student))
+        print(students.add_student(enter_student))
     elif user_choice == 4:
         enter_student = input("Student name? ")
         enter_subject = input("Subject? ")
@@ -105,7 +102,7 @@ while True:
             except ValueError:
                 print("I don't recognize that as a number")
                 num_error = True
-        print(add_mark(enter_student, enter_subject, enter_mark))
+        print(students.add_mark(enter_student, enter_subject, enter_mark))
     elif user_choice == 5:
         break
     else:
